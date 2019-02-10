@@ -2,7 +2,6 @@
 const AWS = require('aws-sdk');
 const util = require('util');
 const gm = require('gm').subClass({ imageMagick: true });
-require('gm-base64');
 const s3 = new AWS.S3();
 
 const performResize = (buffer, imageType, setWidth, setHeight) => {
@@ -10,12 +9,12 @@ const performResize = (buffer, imageType, setWidth, setHeight) => {
     return new Promise ( (resolve, reject) => {
         gm(buffer).size(function(err, size) {
             // Infer the scaling factor to avoid stretching the image unnaturally.
-            var scalingFactor = Math.min(
+            const scalingFactor = Math.min(
                 setWidth / size.width,
                 setHeight / size.height
             );
-            var width  = scalingFactor * size.width;
-            var height = scalingFactor * size.height;
+            const width  = scalingFactor * size.width;
+            const height = scalingFactor * size.height;
 
             // Transform the image buffer in memory.
             this.resize(width, height)
@@ -81,7 +80,6 @@ module.exports.resize = async (event, context) => {
                 Key: srcKey
             };
             const s3Object = await s3.getObject(options).promise();
-
             const resized = await performResize(s3Object.Body, imageType, thumbWidth, thumbHeight);
             console.log("Uploading to s3://" + srcBucket + ":" + dstKey);
 
@@ -102,6 +100,6 @@ module.exports.resize = async (event, context) => {
             }).promise();
             console.log("Thumbnail deleted");
         }
-        resolve(true);
+        resolve();
     });
 };

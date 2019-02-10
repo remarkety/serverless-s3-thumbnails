@@ -4,7 +4,6 @@
   "author": "Guy Harel <guy@remarkety.com> (https://www.remarkety.com)",
   "license": "MIT",
   "dependencies": {
-    "gm": "^1.23.1",
-    "gm-base64": "^1.1.1"
+    "gm": "^1.23.1"
   }
 }
