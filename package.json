@@ -1,0 +1,10 @@
+{
+  "name": "serverless-s3-thumbnails",
+  "version": "1.0.0",
+  "author": "Guy Harel <guy@remarkety.com> (https://www.remarkety.com)",
+  "license": "MIT",
+  "dependencies": {
+    "gm": "^1.23.1",
+    "gm-base64": "^1.1.1"
+  }
+}
